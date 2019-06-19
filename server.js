@@ -26,10 +26,10 @@ app.get('/dt_management.json', function (req, res) {
     res.send(results)
   });
 });
-app.get('/authorities.json', function (req, res) {
+app.get('/dt_management.json', function (req, res) {
   connection.connect();
 
-  connection.query('SELECT * FROM authorities', function (error, results, fields) {
+  connection.query('SELECT * FROM dt_management', function (error, results, fields) {
     if (error) throw error;
     res.send(results)
   });

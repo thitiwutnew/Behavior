@@ -3,6 +3,8 @@ package com.myapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rnfs.RNFSPackage;
+import com.imagepicker.ImagePickerPackage;
 import com.staltz.reactnativenode.RNNodePackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -26,6 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFSPackage(),
+            new ImagePickerPackage(),
             new RNNodePackage(),
             new AsyncStoragePackage(),
             new RNGestureHandlerPackage()

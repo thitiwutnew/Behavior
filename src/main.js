@@ -25,7 +25,7 @@ export default  class main extends Component{
           <Icon name="create" />
             <Text>แก้ไขข้อมูลผู้มีพฤติกรรมเสี่ยง</Text>
           </Button>
-          <Button block success style={styles.Buttonbody}>
+          <Button block success style={styles.Buttonbody} onPress={()=>navigate("Viewdata",{})}>
           <Icon name="contacts" />
             <Text>ดูข้อมูลผู้มีพฤติกรรมเสี่ยง</Text>
           </Button>

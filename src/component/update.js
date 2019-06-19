@@ -1,41 +1,45 @@
 import React, { Component } from 'react'
 import { StyleSheet,Image,TouchableOpacity,TextInput,Alert} from 'react-native';
 import { Container,Text, Content,Header, Footer, Icon,Body, FooterTab, Title,Button, View } from 'native-base';
-import Childadd from './add';
+import AsyncStorage from '@react-native-community/async-storage';
 class Pages extends Component {
-      constructor(props){
-        super(props);
-        this.state = {
+      state = {
           authorities: [],
-            isLoading: false
+          aaaaaaa: ''
         }
-     }
+     
     
-     componentDidMount() {
-        this.updateauthorities()
-      }
-
       updateauthorities(){
-        fetch('http://192.168.1.102:3000/authorities.json')
+        var temp ='';
+        fetch("http://192.168.1.102:3000/dt_management.json", {
+          method: "Get",
+          headers:{
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        })
         .then((response) => response.json())
-        .then((responseJson) => {
+        .then((response) => {
+          console.log("5555555555555555555", response);
           this.setState({
-            isLoading: true,
-            authorities: responseJson
+            authorities: response
+          }, function(){
+
           });
+            AsyncStorage.getItem('dt_managements1').then((value) =>{
+              console.log("3333333333333333333333333333",value);
+              AsyncStorage.setItem('dt_managements1', JSON.stringify(response)).then(()=>{
+               Alert.alert("อัพเดตข้อมูลสำเร็จ")
+              })
+            })
         })
         .catch((error) => {
-          console.error(error);
-        });
-        
+          
+        })
       }
   render() {
     var  {navigate} = this.props.navigation;
     return (
-      <React.Fragment>
-         <Childadd authorities={this.state.authorities}/>
-      </React.Fragment>
-     
       <Container>
       <Header style={styles.Header}>
         <Body>
@@ -46,15 +50,8 @@ class Pages extends Component {
       </Header>
       <View style={styles.container}> 
       <Content >
-      {
-           this.state.authorities.map((authorities) => (
-
-              <Text> {authorities.at_rank } {authorities.at_name} {authorities.at_name} {authorities.at_name}</Text>
-              
-            ))
-          }
           <Text style={ styles.content}> </Text>
-      <Button block warning style={styles.Buttonbody} onPress={this.updates}>
+        <Button block warning style={styles.Buttonbody} onPress={this.updateauthorities.bind(this)}>
           <Icon name="md-arrow-round-down" />
             <Text> อัพเดตข้อมูล </Text>
           </Button>
