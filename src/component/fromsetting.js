@@ -17,7 +17,7 @@ export default class Input extends Component {
 
     onSubmitEditing(text)
     this.setState({text: ''})
-    Alert.alert('เปลี่ยนรหัสยืนยัน สำเร็จ');
+    Alert.alert('         เปลี่ยนรหัสยืนยันสำเร็จ');
   
   }
 

@@ -1,7 +1,7 @@
 import React,{ Component } from 'react';
 import { StyleSheet,Image,BackHandler} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { Container,Text, Content,Header, Footer, Icon,Body, FooterTab, Title,Button, View } from 'native-base';
+import { Container,Text, Content,Header, Footer, Icon,Body, List, ListItem,  FooterTab, Title,Button, View,Left, Right } from 'native-base';
 import Input from './fromsetting';
 const STORAGE_KEY = 'Account'
 
@@ -35,21 +35,36 @@ export default  class add extends Component{
   }
     render(){
         var  {navigate} = this.props.navigation;
+        const { navigation } = this.props;
         return(
         <Container>
         <Header style={styles.Header}>
           <Body>
             <Title style={styles.headertext}>
             <Image style={styles.images} source={require('../image/logo.png')} />
-            ตั้งค่ารหัสยืนยันตัวตน</Title>
+            ตั้งค่าระบบทั่วไป</Title>
           </Body>
         </Header>
         <View style={styles.container}> 
-        <Content >
-        <Input
-          placeholder={'กรอกรหัสยืนยันใหม่'}
-          onSubmitEditing={this.save}
-        />
+        <Content style={styles.panelsetting}>
+          <List>
+          <ListItem onPress={()=>navigate("Account")}>  
+             <Left>
+                <Text>ตั้งค่าผู้ใช้งาน</Text>
+              </Left>
+              <Right>
+                <Icon name="arrow-forward" style={{color:'#000'}} />
+              </Right>
+            </ListItem>
+            <ListItem  onPress={()=>navigate("update_password")}>
+             <Left>
+                <Text> เปลี่ยนรหัสยืนยันตัวตน</Text>
+              </Left>
+              <Right>
+                <Icon name="arrow-forward" style={{color:'#000'}} />
+              </Right>
+            </ListItem>
+          </List>
         </Content>
         </View>
         <Footer>
@@ -58,10 +73,10 @@ export default  class add extends Component{
               <Icon name="home" />
               <Text>หน้าหลัก</Text>
             </Button>
-            <Button active style={styles.footer} onPress={() => BackHandler.exitApp()}>
-              <Icon name="exit" />
-              <Text>ออกโปรแกรม</Text>
-            </Button>
+            <Button style={styles.footer} onPress={() => navigation.goBack()}>
+            <Icon name="arrow-back" style={{color:'#fff'}} />
+            <Text style={{color:'#fff'}}>ย้อนกลับ</Text>
+          </Button>
           </FooterTab>
         </Footer>
       </Container>
@@ -81,6 +96,9 @@ const styles = StyleSheet.create({
     fontSize: 13,
     alignItems: 'center',
  
+  },
+  panelsetting:{
+    width:430,
   },
   textbody: {
     margin : 80,

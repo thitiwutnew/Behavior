@@ -1,7 +1,6 @@
 apply plugin: "com.android.application"
-
 import com.android.build.OutputFile
-
+// apply plugin: 'com.google.gms.google-services'
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
  * and bundleReleaseJsAndAssets).
@@ -104,9 +103,13 @@ android {
     defaultConfig {
         applicationId "com.myapp"
         minSdkVersion rootProject.ext.minSdkVersion
+         missingDimensionStrategy 'react-native-camera', 'general'
         targetSdkVersion rootProject.ext.targetSdkVersion
+       
+        multiDexEnabled false
         versionCode 1
         versionName "1.0"
+       
     }
     splits {
         abi {
@@ -118,10 +121,14 @@ android {
     }
     buildTypes {
         release {
+            minifyEnabled false
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+     dexOptions {
+    preDexLibraries true
+  }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -138,6 +145,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-image-base64')
+    implementation project(':react-native-config')
     implementation project(':react-native-fs')
     implementation project(':react-native-image-picker')
     implementation project(':react-native-node')
@@ -147,6 +156,12 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(':react-native-sqlite-storage')
+    compile project(':react-native-camera')
+    implementation project(':react-native-camera')
+    compile project(':@react-native-community_cameraroll')
+    implementation project(':rn-fetch-blob') 
+    implementation project(':react-native-splash-screen')
+    
 }
 
 // Run this once to be able to run the application with BUCK
