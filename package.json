@@ -11,7 +11,7 @@
     "@react-native-community/async-storage": "^1.5.0",
     "@react-native-community/cameraroll": "^1.1.1",
     "body-parser": "^1.18.3",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "md5": "^2.2.1",
     "mysql": "^2.17.1",
     "native-base": "^2.12.1",
